@@ -21,7 +21,7 @@ class KafkaTopicConfig(
             setOf("_RETRY", "_ERROR").forEach{
                 val newErrorOrRetryTopic = NewTopic(topic.name + "_${properties.consumer.groupId}" + it, topic.partition, topic.replicaFactor.toShort())
                 beanFactory.initializeBean(newErrorOrRetryTopic, newErrorOrRetryTopic.name())
-                beanFactory.registerSingleton(newErrorOrRetryTopic.name(), topic)
+                beanFactory.registerSingleton(newErrorOrRetryTopic.name(), newErrorOrRetryTopic)
             }
         }
     }

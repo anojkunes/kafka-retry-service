@@ -24,17 +24,4 @@ class KafkaConsumer {
     LOG.info("Recieved Retry message on $topic::$event")
     throw RuntimeException()
   }
-
-  @KafkaListener(topicPattern = ".*_ERROR", containerFactory = "kafkaDeadLetterContainerFactory", groupId = "ms-kafka-replay")
-  fun onErrorEvent(@Payload event: ConsumerRecord<*, *>,
-                   @Header(KafkaHeaders.RECEIVED_TOPIC) topic: String,
-                   @Header(KafkaHeaders.DLT_EXCEPTION_STACKTRACE) exceptionMessage: String,
-                   @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) key: String
-
-  ) {
-    LOG.info("Headers:{}, Key:{}, Payload: {}, Topic:{}", event.headers(), event.key(), event.value(), topic)
-    LOG.info("key: {}, event:{}", key, event)
-    LOG.info("Error Message:{}", exceptionMessage)
-  }
-
 }
