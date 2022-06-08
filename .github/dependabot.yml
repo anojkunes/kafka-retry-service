@@ -3,4 +3,9 @@ updates:
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: daily
+      time: '16:00'
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: io.github.microutils:kotlin-logging
+        versions: "> 2.1.23"
